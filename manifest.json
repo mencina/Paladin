@@ -3,15 +3,25 @@
   "manifest_version": 2,
   "name": "Paladin",
   "version": "0.0.1",
+  "author": "Alvaro Serrano and Mario Encina",
 
   // Recommended
   "description": "A plain text description",
 
+  "permissions": [
+    "tabs"
+  ],
   "content_scripts": [
     {
       "matches": ["http://developer.chrome.com/extensions/*"],
       "js": ["jquery.js", "paladin.js"],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  }
 }
