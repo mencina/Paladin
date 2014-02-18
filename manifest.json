@@ -1,0 +1,17 @@
+{
+  // Required
+  "manifest_version": 2,
+  "name": "Paladin",
+  "version": "0.0.1",
+
+  // Recommended
+  "description": "A plain text description",
+
+  "content_scripts": [
+    {
+      "matches": ["http://developer.chrome.com/extensions/*"],
+      "js": ["jquery.js", "paladin.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
