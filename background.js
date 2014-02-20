@@ -14,12 +14,25 @@ function click(tabId, changeInfo, tab) {
 				state = 1;
 				message = "click send message";
 				break;
+			case 1:
+				state = 2
+				message = {
+					'command': "populate fields",
+					'subject': "This is the subject",
+					'message': "This is the message",
+				};
+				break;
 			default:
 				return;
 		}
 
 		chrome.tabs.sendMessage(tab.id, message, function(response){
-			chrome.tabs.update(tab.id, {"url": append_youtube(response)});
+			switch (state) {
+				case 1:
+					chrome.tabs.update(tab.id, {"url": append_youtube(response)});
+				case 2:
+					console.log(response)
+			}
 		});
 	}
 }

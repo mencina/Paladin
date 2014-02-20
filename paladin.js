@@ -34,6 +34,15 @@ chrome.runtime.onMessage.addListener(
 			response = $('a.about-action').attr('href');
 		}
 
+		if (request.command == "populate fields"){
+			jQuery( document ).ready(function( $ ) {
+				$("#compose_subject").val(request.subject);
+				$("#compose_message").val(request.message);
+			});
+
+			response = "package read"
+		}
+
 		sendResponse(response);
 	}
 );
