@@ -28,6 +28,19 @@ chrome.runtime.onMessage.addListener(
 				response.push(data)
 			});
 		}
+
+		if (request == "click about") {
+			about = $("#channel-navigation-menu").find("a")[3];
+			url = $(about).attr("href");
+			console.log(url);
+			response = url;
+		}
+
+		if (request == "click send message") {
+			console.log("click send message");
+			response = $('a.about-action').attr('href');
+		}
+
 		sendResponse(response);
 	}
 );
