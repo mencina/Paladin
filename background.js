@@ -12,10 +12,6 @@ function click(tabId, changeInfo, tab) {
 		switch (state) {
 			case 0:
 				state = 1;
-				message = "click about";
-				break;
-			case 1:
-				state = 2;
 				message = "click send message";
 				break;
 			default:
@@ -37,7 +33,7 @@ function get_response_init(response) {
 	// callback from response, print
 	console.log('response: ' + response);
 
-	var url = append_youtube(response[0].author_url)
+	var url = append_youtube(response[0].author_url + '/about')
 	chrome.tabs.create({"url": url})
 }
 
