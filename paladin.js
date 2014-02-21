@@ -40,7 +40,7 @@ chrome.runtime.onMessage.addListener(
 				$("#compose_message").val(request.message);
 
 				// choose video to attach
-				$("#field_reference_video").val("PTsWxvNcZRg")
+				$("#field_reference_video").val("_leKVxyPBrU")
 
 				// send message
 				$('#inbox_send_message').click();
