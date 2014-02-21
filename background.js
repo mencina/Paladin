@@ -21,7 +21,7 @@ function click(tabId, changeInfo, tab) {
 				message = {
 					'command': "populate fields",
 					'subject': "Hi " + author_name,
-					'message': "Hi " + author_name + ". I really enjoyed the " + video_title + " video! Please check www.klooff.com and follow me! Good luck your you and me! =)"
+					'message': "Hi " + author_name + ". I really enjoyed the " + video_title + " video! Please check www.klooff.com and follow me! Good luck your you and us! =) By the way, this is one of my favorite videos, it's Dj Tiesto."
 				};
 				break;
 			default:
