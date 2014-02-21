@@ -38,9 +38,12 @@ chrome.runtime.onMessage.addListener(
 			jQuery( document ).ready(function( $ ) {
 				$("#compose_subject").val(request.subject);
 				$("#compose_message").val(request.message);
+
+				$('#inbox_send_message').click();
+
 			});
 
-			response = "package read"
+			response = "done"
 		}
 
 		sendResponse(response);
