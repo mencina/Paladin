@@ -1,6 +1,7 @@
-var state = 0;
 var author_name;
 var video_title;
+var data = {};
+var urls;
 
 function append_youtube(url) {
 	full_url = "http://www.youtube.com" + url
@@ -10,6 +11,9 @@ function append_youtube(url) {
 function click(tabId, changeInfo, tab) {
 	if(changeInfo.status == 'complete') {
 		console.log('updated tab');
+		var state = data[tab.id].state;
+		var author_name = data[tab.id].author_name;
+		var video_title = data[tab.id].video_title;
 		var message;
 		switch (state) {
 			case 0:
@@ -32,12 +36,15 @@ function click(tabId, changeInfo, tab) {
 			switch (state) {
 				case 1:
 					// chrome.tabs.update(tab.id, {"url": append_youtube(response)});
-					chrome.tabs.update(tab.id, {"url": "http://www.youtube.com/inbox?action_compose=1&to_user_ext_ids=WsVH7N34j-N4av5yFedlTg"});
-
+					// to marran:
+					// chrome.tabs.update(tab.id, {"url": "http://www.youtube.com/inbox?action_compose=1&to_user_ext_ids=WsVH7N34j-N4av5yFedlTg"});
+					// to bencina:
+					chrome.tabs.update(tab.id, {"url": "https://www.youtube.com/inbox?to_user_ext_ids=HSiivBQaAMqosd2wfU10pw&action_compose=1"});
 				case 2:
 					console.log(response)
 			}
 		});
+		data[tab.id].state = state;
 	}
 }
 
@@ -46,15 +53,20 @@ function update_new_tab(tab) {
 	chrome.tabs.update(tab.id, {});
 }
 
+function raro(info) {
+	return function after_tab_creation(tab) {
+		data[tab.id] = info;
+	}
+}
+
 function get_response_init(response) {
 	// callback from response, print
-	response = response[0];
 	console.log('response: ' + response);
-	author_name = response.author_name
-	video_title = response.video_title
-
-	var url = append_youtube(response.author_url + '/about')
-	chrome.tabs.create({"url": url})
+	for (var i = 0; i < response.length; i++) {
+		var url = append_youtube(response[i].author_url + '/about');
+		response[i]["state"] = 0;
+		chrome.tabs.create({"url": url}, raro(response[i]));
+	};
 }
 
 function init(tabs) {

@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener(
 		}
 
 		if (request.command == "populate fields"){
-			jQuery( document ).ready(function( $ ) {
+			jQuery( document ).ready(function() {
 				$("#compose_subject").val(request.subject);
 				$("#compose_message").val(request.message);
 
