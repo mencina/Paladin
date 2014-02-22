@@ -35,13 +35,20 @@ function click(tabId, changeInfo, tab) {
 		chrome.tabs.sendMessage(tab.id, message, function(response){
 			switch (state) {
 				case 1:
+					// prod
 					// chrome.tabs.update(tab.id, {"url": append_youtube(response)});
 					// to marran:
-					// chrome.tabs.update(tab.id, {"url": "http://www.youtube.com/inbox?action_compose=1&to_user_ext_ids=WsVH7N34j-N4av5yFedlTg"});
+					chrome.tabs.update(tab.id, {"url": "http://www.youtube.com/inbox?action_compose=1&to_user_ext_ids=WsVH7N34j-N4av5yFedlTg"});
 					// to bencina:
-					chrome.tabs.update(tab.id, {"url": "https://www.youtube.com/inbox?to_user_ext_ids=HSiivBQaAMqosd2wfU10pw&action_compose=1"});
+					// chrome.tabs.update(tab.id, {"url": "https://www.youtube.com/inbox?to_user_ext_ids=HSiivBQaAMqosd2wfU10pw&action_compose=1"});
+					break;
 				case 2:
 					console.log(response)
+					// chrome.tabs.remove(tab.id)
+					break;
+				default:
+					console.log("default")
+					break;
 			}
 		});
 		data[tab.id].state = state;
@@ -53,7 +60,7 @@ function update_new_tab(tab) {
 	chrome.tabs.update(tab.id, {});
 }
 
-function raro(info) {
+function wrapper(info) {
 	return function after_tab_creation(tab) {
 		data[tab.id] = info;
 	}
@@ -62,10 +69,12 @@ function raro(info) {
 function get_response_init(response) {
 	// callback from response, print
 	console.log('response: ' + response);
+	console.log(response.length)
 	for (var i = 0; i < response.length; i++) {
+		console.log(i)
 		var url = append_youtube(response[i].author_url + '/about');
 		response[i]["state"] = 0;
-		chrome.tabs.create({"url": url}, raro(response[i]));
+		chrome.tabs.create({"url": url}, wrapper(response[i]));
 	};
 }
 

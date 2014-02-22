@@ -38,6 +38,7 @@ chrome.runtime.onMessage.addListener(
 			jQuery( document ).ready(function() {
 				$("#compose_subject").val(request.subject);
 				$("#compose_message").val(request.message);
+				
 
 				// choose video to attach
 				$("#field_reference_video").val("_leKVxyPBrU")
