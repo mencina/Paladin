@@ -1,3 +1,11 @@
+chrome.runtime.onMessage.addListener(
+	function(request, sender, sendResponse) {
+		if (request == "kill me")
+			chrome.tabs.remove(sender.tab.id)
+	}
+);
+
+
 var author_name;
 var video_title;
 var data = {};
@@ -9,7 +17,7 @@ function append_youtube(url) {
 }
 
 function click(tabId, changeInfo, tab) {
-	if(changeInfo.status == 'complete') {
+	if(changeInfo.status == 'complete' && data[tab.id]) {
 		console.log('updated tab');
 		var state = data[tab.id].state;
 		var author_name = data[tab.id].author_name;
@@ -32,6 +40,8 @@ function click(tabId, changeInfo, tab) {
 				return;
 		}
 
+		data[tab.id].state = state;
+
 		chrome.tabs.sendMessage(tab.id, message, function(response){
 			switch (state) {
 				case 1:
@@ -51,7 +61,6 @@ function click(tabId, changeInfo, tab) {
 					break;
 			}
 		});
-		data[tab.id].state = state;
 	}
 }
 
@@ -70,7 +79,7 @@ function get_response_init(response) {
 	// callback from response, print
 	console.log('response: ' + response);
 	console.log(response.length)
-	for (var i = 0; i < response.length; i++) {
+	for (var i = 19; i < response.length; i++) {
 		console.log(i)
 		var url = append_youtube(response[i].author_url + '/about');
 		response[i]["state"] = 0;

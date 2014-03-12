@@ -39,12 +39,17 @@ chrome.runtime.onMessage.addListener(
 				$("#compose_subject").val(request.subject);
 				$("#compose_message").val(request.message);
 				
-
 				// choose video to attach
 				$("#field_reference_video").val("_leKVxyPBrU")
 
 				// send message
 				$('#inbox_send_message').click();
+
+				$('#inbox_error_box').change(function() {
+				chrome.runtime.sendMessage("kill me")
+					
+				})
+
 
 			});
 
