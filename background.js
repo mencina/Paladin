@@ -29,7 +29,7 @@ function click(tabId, changeInfo, tab) {
 				message = "click send message";
 				break;
 			case 1:
-				state = 2
+				state = 2;
 				message = {
 					'command': "populate fields",
 					'subject': "Hi " + author_name,
@@ -48,16 +48,16 @@ function click(tabId, changeInfo, tab) {
 					// prod
 					// chrome.tabs.update(tab.id, {"url": append_youtube(response)});
 					// to marran:
-					chrome.tabs.update(tab.id, {"url": "http://www.youtube.com/inbox?action_compose=1&to_user_ext_ids=WsVH7N34j-N4av5yFedlTg"});
+					// chrome.tabs.update(tab.id, {"url": "http://www.youtube.com/inbox?action_compose=1&to_user_ext_ids=WsVH7N34j-N4av5yFedlTg"});
 					// to bencina:
-					// chrome.tabs.update(tab.id, {"url": "https://www.youtube.com/inbox?to_user_ext_ids=HSiivBQaAMqosd2wfU10pw&action_compose=1"});
+					chrome.tabs.update(tab.id, {"url": "https://www.youtube.com/inbox?to_user_ext_ids=HSiivBQaAMqosd2wfU10pw&action_compose=1"});
 					break;
 				case 2:
-					console.log(response)
+					console.log(response);
 					// chrome.tabs.remove(tab.id)
 					break;
 				default:
-					console.log("default")
+					console.log("default");
 					break;
 			}
 		});

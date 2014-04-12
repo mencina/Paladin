@@ -45,11 +45,9 @@ chrome.runtime.onMessage.addListener(
 				// send message
 				$('#inbox_send_message').click();
 
-				$('#inbox_error_box').change(function() {
-				chrome.runtime.sendMessage("kill me")
-					
-				})
-
+				$("#inbox_error_box").bind("DOMSubtreeModified", function() {
+					chrome.runtime.sendMessage("kill me");
+				});
 
 			});
 
